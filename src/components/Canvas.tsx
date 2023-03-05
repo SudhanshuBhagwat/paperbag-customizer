@@ -2,13 +2,7 @@
 
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import {
-  Center,
-  Environment,
-  OrbitControls,
-  Stage,
-  useGLTF,
-} from "@react-three/drei";
+import { Center, OrbitControls, Stage, useGLTF } from "@react-three/drei";
 import { easing } from "maath";
 import { useSnapshot } from "valtio";
 import { state } from "@/store";
@@ -20,6 +14,7 @@ export const ThreeCanvas = () => {
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 70, position: [0, 0, 2.5] }}>
       <Suspense fallback={null}>
         <Stage
+          //@ts-ignore
           controls={ref}
           preset="rembrandt"
           intensity={0.5}
@@ -38,6 +33,7 @@ export const ThreeCanvas = () => {
 
 function Bag() {
   const snap = useSnapshot(state);
+  //@ts-ignore
   const { nodes, materials } = useGLTF("/bag_01.gltf");
 
   useFrame((state, delta) => {
