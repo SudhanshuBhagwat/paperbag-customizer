@@ -7,7 +7,7 @@ export default function Customizer() {
   const snap = useSnapshot(state);
 
   return (
-    <div className="absolute top-0 right-4 w-auto h-full">
+    <div className="absolute top-0 md:right-4 right-2 w-auto h-full">
       <div className="customizer">
         <div className="color-options">
           {snap.colors.map((color) => (

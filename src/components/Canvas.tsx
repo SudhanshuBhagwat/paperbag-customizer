@@ -2,7 +2,14 @@
 
 import React, { Suspense, useRef } from "react";
 import { Canvas, useFrame } from "@react-three/fiber";
-import { Center, OrbitControls, Stage, useGLTF } from "@react-three/drei";
+import {
+  Center,
+  Html,
+  OrbitControls,
+  Stage,
+  useGLTF,
+  useProgress,
+} from "@react-three/drei";
 import { easing } from "maath";
 import { useSnapshot } from "valtio";
 import { state } from "@/store";
@@ -12,7 +19,7 @@ export const ThreeCanvas = () => {
 
   return (
     <Canvas shadows dpr={[1, 2]} camera={{ fov: 70, position: [0, 0, 2.5] }}>
-      <Suspense fallback={null}>
+      <Suspense fallback={<Loader />}>
         <Stage
           //@ts-ignore
           controls={ref}
@@ -30,6 +37,15 @@ export const ThreeCanvas = () => {
     </Canvas>
   );
 };
+
+function Loader() {
+  const { progress } = useProgress();
+  return (
+    <Html className="text-sm whitespace-nowrap" center>
+      {progress}% loaded
+    </Html>
+  );
+}
 
 function Bag() {
   const snap = useSnapshot(state);
